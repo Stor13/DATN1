@@ -1,0 +1,225 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+:root {
+  --primary: #ff6347;
+  --dark: #262626;
+  --gray: #676767;
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+  scroll-behavior: smooth;
+}
+
+body {
+  min-height: 100vh;
+}
+
+.app {
+  width: 80%;
+  margin: auto;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.hidden-input {
+  border: 0;
+  clip: rect(0 0 0 0);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
+  white-space: nowrap;
+}
+.swiper-layout .swiper-slide {
+  width: 100%;
+}
+.form-layout {
+  @apply grid grid-cols-1 lg:grid-cols-2 lg:gap-x-10 mb-5 lg:mb-10;
+}
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  box-shadow: 0 0 0 30px white inset;
+}
+.quill {
+  @apply border border-[#F1F1F3] rounded-xl text-center;
+  border-radius: 10px;
+  padding: 15px 25px;
+  .ql-toolbar.ql-snow {
+    border: none;
+    @apply bg-[#B2B3BD] bg-opacity-10 rounded-xl py-3 px-5 inline-block;
+  }
+  .ql-container.ql-snow{
+    @apply border-none text-base;
+  }
+}
+.triangle-down {
+  position: absolute;
+  bottom: 0;
+  right: 50%;
+  transform: translateX(50%) translateY(100%);
+  width: 0;
+  height: 0;
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
+  border-top: 12px solid #a4d96c;
+}
+.ReactModal__Body--open {
+  overflow: hidden;
+}
+
+.grid-layout {
+  display: grid;
+  grid-auto-columns: 235px;
+  gap: 20px;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+  @media screen and (min-width: 1024px) {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 48px;
+  }
+  @media screen and (max-width: 1023.98px) {
+    grid-auto-flow: column;
+    scroll-snap-type: x mandatory;
+    overflow-x: auto;
+  }
+
+  & > * {
+    scroll-snap-align: start;
+  }
+  &--primary {
+    grid-auto-columns: 220px;
+    @media screen and (min-width: 1024px) {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+  }
+}
+.home-block {
+  padding-bottom: 40px;
+  @media screen and (min-width: 1024px) {
+    padding-bottom: 60px;
+  }
+}
+
+img,
+picture,
+video,
+canvas,
+svg {
+  display: block;
+  max-width: 100%;
+}
+input,
+button,
+textarea,
+select {
+  font: inherit;
+  outline: none;
+}
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  overflow-wrap: break-word;
+}
+
+
+.entry-content .ql-snow .ql-editor {
+  font-family: "Epilogue", sans-serif;
+  font-size: 16px;
+  h2,
+  h3,
+  h4 {
+    font-weight: bold;
+    margin-bottom: 20px;
+  }
+  h2 {
+    font-size: 32px;
+  }
+  h3 {
+    font-size: 26px;
+  }
+  h4 {
+    font-size: 22px;
+  }
+  p {
+    margin-bottom: 20px;
+    line-height: 2;
+  }
+  figure {
+    margin-bottom: 20px;
+  }
+  figure img {
+    border-radius: 20px;
+    margin-bottom: 10px;
+  }
+  figcaption {
+    text-align: center;
+    font-style: italic;
+    font-size: 14px;
+    color: #6b6b6b;
+  }
+  ul {
+    list-style-type: disc;
+  }
+  ol {
+    list-style-type: decimal;
+    padding-left: 40px;
+    margin-left: 0;
+  }
+  ul,
+  ol {
+    margin-bottom: 20px;
+    li {
+      margin-bottom: 10px;
+    }
+  }
+  img {
+    border-radius: 8px;
+    margin-bottom: 30px;
+  }
+  @media screen and (max-width: 1023.98px) {
+    font-size: 14px;
+    h2 {
+      font-size: 26px;
+    }
+    h3 {
+      font-size: 24px;
+    }
+    h4 {
+      font-size: 20px;
+    }
+  }
+}
+
+

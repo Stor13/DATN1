@@ -32,6 +32,7 @@ contract RestaurantManagement is AccessControl, ReentrancyGuard, Pausable {
         uint256 orderId;
         address customer;
         uint256[] foodIds; // Danh sách món ăn
+        string[] foodNames;
         uint256[] quantities; // Số lượng tương ứng
         uint256 totalAmount; // Tổng tiền
         uint256 timestamp;
@@ -218,14 +219,16 @@ contract RestaurantManagement is AccessControl, ReentrancyGuard, Pausable {
         );
 
         uint256 totalAmount = 0;
+        string[] memory foodNames = new string[](_foodIds.length);
 
-        // Tính tổng tiền
+        // Calculate total and get food names
         for (uint256 i = 0; i < _foodIds.length; i++) {
             require(_foodIds[i] <= foodCounter, "Food does not exist");
             Food storage food = foods[_foodIds[i]];
             require(food.isAvailable, "Food not available");
 
             totalAmount += food.price * _quantities[i];
+            foodNames[i] = food.name;
         }
 
         uint256 feeAmount = (totalAmount * platformFee) / 100;
@@ -233,12 +236,12 @@ contract RestaurantManagement is AccessControl, ReentrancyGuard, Pausable {
 
         require(msg.value >= finalAmount, "Insufficient payment");
 
-        // Tạo đơn hàng và giữ tiền trong contract
         orderCounter++;
         orders[orderCounter] = Order({
             orderId: orderCounter,
             customer: msg.sender,
             foodIds: _foodIds,
+            foodNames: foodNames,
             quantities: _quantities,
             totalAmount: totalAmount,
             timestamp: block.timestamp,
@@ -246,7 +249,6 @@ contract RestaurantManagement is AccessControl, ReentrancyGuard, Pausable {
         });
 
         customerOrders[msg.sender].push(orderCounter);
-
         emit OrderCreated(orderCounter, msg.sender, totalAmount);
     }
 
@@ -392,5 +394,26 @@ contract RestaurantManagement is AccessControl, ReentrancyGuard, Pausable {
         }
 
         return customerOrdersList;
+    }
+
+    function getPendingOrders() external view returns (Order[] memory) {
+        uint256 pendingCount = 0;
+        for (uint256 i = 1; i <= orderCounter; i++) {
+            if (orders[i].status == OrderStatus.Pending) {
+                pendingCount++;
+            }
+        }
+
+        Order[] memory pendingOrders = new Order[](pendingCount);
+        uint256 currentIndex = 0;
+
+        for (uint256 i = 1; i <= orderCounter; i++) {
+            if (orders[i].status == OrderStatus.Pending) {
+                pendingOrders[currentIndex] = orders[i];
+                currentIndex++;
+            }
+        }
+
+        return pendingOrders;
     }
 }
