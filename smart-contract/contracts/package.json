@@ -1,0 +1,25 @@
+{
+  "devDependencies": {
+    "@nomicfoundation/hardhat-toolbox": "^5.0.0",
+    "hardhat": "^2.22.6",
+    "typescript": "^5.6.2"
+  },
+  "scripts": {
+    "compile": "hardhat compile",
+    "test": "hardhat test",
+    "verify:testnet": "hardhat verify --network testnet",
+    "verify:mainnet": "hardhat verify --network mainnet",
+    "interact:swapUSDCForCER": "hardhat run scripts/interact/swapUSDCForCER.ts --network testnet",
+    "interact:offsetToBroadcast": "hardhat run scripts/interact/offsetToBroadcast.ts --network testnet",
+    "interact:mintCER": "hardhat run scripts/interact/mintCER.ts --network mainnet",
+    "deploy:testnet": "hardhat run scripts/deploy/1_Deploy_Food.ts --network testnet",
+    "deploy:mainnet": "hardhat run scripts/deploy/1_Deploy_CERToken.ts --network mainnet"
+
+  },
+  "dependencies": {
+    "@nomicfoundation/hardhat-verify": "^2.0.8",
+    "@nomiclabs/hardhat-ethers": "^2.2.3",
+    "@openzeppelin/contracts": "^5.0.2",
+    "dotenv": "^16.4.5"
+  }
+}
